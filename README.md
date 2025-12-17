@@ -1,96 +1,59 @@
 # Gmail Clone
 
-A full-stack Gmail clone application built with Node.js (Express) for the backend and React (Vite) for the frontend. This project demonstrates user authentication, email management, and a modern UI/UX similar to Gmail.
+A full-stack Gmail-like application built with Node.js and React. Implements user authentication, email management, and a clean, responsive interface inspired by Gmail.
 
 ## Features
 
-- User Signup & Login (JWT authentication)
-- Compose, send, receive, and delete emails
-- Inbox, Sent, and Trash views
-- Responsive and modern UI
-- Input validation and error handling
-- Protected routes and middleware
+* User authentication with JWT
+* Compose, send, receive, and delete emails
+* Inbox, Sent, and Trash views
+* Protected routes and middleware
+* Responsive UI with basic validation and error handling
 
 ## Tech Stack
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT for authentication
-- CORS, custom middleware
+**Backend**
 
-### Frontend
-- React (Vite)
-- CSS Modules
-- Axios for API requests
+* Node.js
+* Express.js
+* MongoDB with Mongoose
+* JWT authentication
 
-## Folder Structure
+**Frontend**
+
+* React (Vite)
+* CSS Modules
+* Axios
+
+## Project Structure
 
 ```
-backend/
-  index.js
-  package.json
-  config/
-  controllers/
-  middlewares/
-  models/
-  routes/
-  validators/
-frontend/
-  src/
-    components/
-    App.jsx
-    main.jsx
-  public/
-  package.json
+backend/    # API, auth, database
+frontend/   # React client
 ```
 
 ## Getting Started
 
-### Prerequisites
-- Node.js (v16+ recommended)
-- MongoDB (local or Atlas)
+**Requirements:** Node.js v16+, MongoDB
 
-### Backend Setup
-1. Navigate to the backend folder:
-   ```sh
-   cd backend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Configure MongoDB connection in `config/db.js`.
-4. Start the backend server:
-   ```sh
-   npm start
-   ```
+```bash
+# Backend
+cd backend
+npm install
+npm start
 
-### Frontend Setup
-1. Navigate to the frontend folder:
-   ```sh
-   cd frontend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Start the frontend app:
-   ```sh
-   npm run dev
-   ```
+# Frontend
+cd frontend
+npm install
+npm run dev
+```
 
-### Environment Variables
-- Configure backend environment variables (e.g., MongoDB URI, JWT secret) as needed.
+## API Routes
 
-## API Endpoints
-- `/api/auth` - Authentication routes (login, signup)
-- `/api/email` - Email operations (send, fetch, delete)
-- `/api/user` - User profile and related actions
-
-## Contributing
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+* `/api/auth` – Login and signup
+* `/api/email` – Email operations
+* `/api/user` – User-related actions
 
 ## License
-This project is licensed under the MIT License.
+
+MIT License
