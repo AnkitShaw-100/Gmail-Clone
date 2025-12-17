@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// Google font import for demo (best placed in index.html <head>)
 const googleFont = {
   fontFamily: "Roboto, Arial, sans-serif",
 };

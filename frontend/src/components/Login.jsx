@@ -28,7 +28,7 @@ const Login = ({ onLogin, onSignup }) => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-roboto">
-      {/* ✅ Same size as signup but no image */}
+      {/* Same size as signup but no image */}
       <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl border border-gray-200 px-12 py-10">
         <img
           src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"

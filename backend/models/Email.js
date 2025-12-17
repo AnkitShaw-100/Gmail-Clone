@@ -13,7 +13,7 @@ const emailSchema = new mongoose.Schema(
         from: { type: String, required: true },
         body: { type: String, required: true },
         createdAt: { type: Date, default: Date.now },
-      }
+      },
     ],
   },
   {

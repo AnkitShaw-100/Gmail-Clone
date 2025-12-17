@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 import Messages from './Messages';
 
 const Body = ({ refreshKey, onEmailSent }) => {
-    const [selectedTab, setSelectedTab] = useState(0); // 0: Inbox, 3: Sent
+    const [selectedTab, setSelectedTab] = useState(0); 
     return (
         <div className='flex w-full'>
             <Sidebar onEmailSent={onEmailSent} onSelect={setSelectedTab} />
