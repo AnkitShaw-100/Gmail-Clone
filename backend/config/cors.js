@@ -1,8 +1,7 @@
-
-const corsOptions = {
+export const corsOptions = {
   origin: [
     "https://mailify-xi.vercel.app",
-    "http://localhost:3000"
+    "http://localhost:5174"
   ],
   credentials: true,
 };
