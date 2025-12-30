@@ -1,4 +1,4 @@
-# Gmail Clone
+# Mailify
 
 A full-stack Gmail-like application built with Node.js and React. Implements user authentication, email management, and a clean, responsive interface inspired by Gmail.
 
