@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import MailDetail from './MailDetail';
-import { MdDeleteOutline, MdOutlineMarkEmailRead } from 'react-icons/md';
+import React, { useState, useEffect } from "react";
+import MailDetail from "./MailDetail";
+import { MdDeleteOutline, MdOutlineMarkEmailRead } from "react-icons/md";
 
 // Backend se emails fetch karne ke liye
 const fetchEmails = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/emails`, {
-    headers: { 'Authorization': `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) return [];
   return await res.json();
@@ -25,7 +25,9 @@ const Messages = ({ refreshKey, selectedTab }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [openMail, setOpenMail] = useState(null);
 
-  const userEmail = JSON.parse(atob(localStorage.getItem('token').split('.')[1])).email;
+  const userEmail = JSON.parse(
+    atob(localStorage.getItem("token").split(".")[1])
+  ).email;
 
   useEffect(() => {
     fetchEmails().then(setEmails);
@@ -34,47 +36,57 @@ const Messages = ({ refreshKey, selectedTab }) => {
   // Inbox, Starred, Sent filtering
   let filtered = emails;
   if (selectedTab === SIDEBAR_TABS.INBOX) {
-    filtered = emails.filter(email => email.to === userEmail);
+    filtered = emails.filter((email) => email.to === userEmail);
   } else if (selectedTab === SIDEBAR_TABS.STARRED) {
-    filtered = emails.filter(email => email.starred && (email.to === userEmail || email.from === userEmail));
+    filtered = emails.filter(
+      (email) =>
+        email.starred && (email.to === userEmail || email.from === userEmail)
+    );
   } else if (selectedTab === SIDEBAR_TABS.SENT) {
-    filtered = emails.filter(email => email.from === userEmail);
+    filtered = emails.filter((email) => email.from === userEmail);
   }
-
 
   // Checkbox state
   const [checkedIds, setCheckedIds] = useState([]);
   const handleCheckbox = (id) => {
-    setCheckedIds(ids => ids.includes(id) ? ids.filter(i => i !== id) : [...ids, id]);
+    setCheckedIds((ids) =>
+      ids.includes(id) ? ids.filter((i) => i !== id) : [...ids, id]
+    );
   };
 
   // Tab filtering logic
   let filterEmail = filtered;
   if (activeTab === 1) {
-    filterEmail = filtered.filter(e => e.subject?.toLowerCase().includes('social'));
+    filterEmail = filtered.filter((e) =>
+      e.subject?.toLowerCase().includes("social")
+    );
   } else if (activeTab === 2) {
-    filterEmail = filtered.filter(e => e.subject?.toLowerCase().includes('promo'));
+    filterEmail = filtered.filter((e) =>
+      e.subject?.toLowerCase().includes("promo")
+    );
   }
 
   // Mark as read
   const handleMarkAsRead = async (id) => {
-    const token = localStorage.getItem('token');
-    import.meta.env.VITE_BACKEND_URL
+    const token = localStorage.getItem("token");
+    import.meta.env.VITE_BACKEND_URL;
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/emails/${id}/read`, {
-      method: 'PATCH',
-      headers: { 'Authorization': `Bearer ${token}` }
+      method: "PATCH",
+      headers: { Authorization: `Bearer ${token}` },
     });
-    setEmails(emails => emails.map(m => m._id === id ? { ...m, read: true } : m));
+    setEmails((emails) =>
+      emails.map((m) => (m._id === id ? { ...m, read: true } : m))
+    );
   };
 
   // Delete
   const handleDelete = async (id) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/emails/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
     });
-    setEmails(emails => emails.filter(m => m._id !== id));
+    setEmails((emails) => emails.filter((m) => m._id !== id));
   };
 
   // Mail detail screen
@@ -89,19 +101,27 @@ const Messages = ({ refreshKey, selectedTab }) => {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex bg-[#f5f7fa] rounded-t-lg shadow-sm sticky top-0 z-10" style={{ width: '48%', marginLeft: 0 }}>
+      <div
+        className="flex bg-[#f5f7fa] rounded-t-lg shadow-sm sticky top-0 z-10"
+        style={{ width: "48%", marginLeft: 0 }}
+      >
         {tabNames.map((name, idx) => (
           <button
             key={name}
             className={`relative flex-1 py-[13px] text-sm font-medium focus:outline-none transition-colors duration-200
-              ${activeTab === idx
-                ? 'text-[#1a73e8] bg-white shadow-sm'
-                : 'text-gray-600 bg-transparent hover:bg-gray-100'}
+              ${
+                activeTab === idx
+                  ? "text-[#1a73e8] bg-white shadow-sm"
+                  : "text-gray-600 bg-transparent hover:bg-gray-100"
+              }
               rounded-t-lg
             `}
             style={{
-              borderBottom: activeTab === idx ? '3px solid #1a73e8' : '3px solid transparent',
-              zIndex: activeTab === idx ? 2 : 1
+              borderBottom:
+                activeTab === idx
+                  ? "3px solid #1a73e8"
+                  : "3px solid transparent",
+              zIndex: activeTab === idx ? 2 : 1,
             }}
             onClick={() => setActiveTab(idx)}
           >
@@ -121,7 +141,9 @@ const Messages = ({ refreshKey, selectedTab }) => {
         return (
           <div
             key={email._id}
-            className={`flex items-start justify-between border-b border-gray-200 px-4 py-3 text-sm hover:cursor-pointer hover:bg-gray-50 group ${checked ? 'bg-blue-50' : ''}`}
+            className={`flex items-start justify-between border-b border-gray-200 px-4 py-3 text-sm hover:cursor-pointer hover:bg-gray-50 group ${
+              checked ? "bg-blue-50" : ""
+            }`}
             onMouseEnter={() => setHoveredId(email._id)}
             onMouseLeave={() => setHoveredId(null)}
             onClick={() => setOpenMail(email)}
@@ -133,41 +155,51 @@ const Messages = ({ refreshKey, selectedTab }) => {
                   type="checkbox"
                   className="w-4 h-4"
                   checked={checked}
-                  onChange={e => {
+                  onChange={(e) => {
                     e.stopPropagation();
                     handleCheckbox(email._id);
                   }}
-                  onClick={e => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                 />
               </div>
 
               <div>
-                <h1 className={email.read ? '' : 'font-semibold'}>{email?.from}</h1>
+                <h1 className={email.read ? "" : "font-semibold"}>
+                  {email?.from}
+                </h1>
               </div>
             </div>
             <div className="flex-1 ml-4">
               <p className="text-gray-600 truncate inline-block max-w-full">
-                {email.body?.length > 130 ? `${email?.body.substring(0, 130)}...` : email.body}
+                {email.body?.length > 130
+                  ? `${email?.body.substring(0, 130)}...`
+                  : email.body}
               </p>
             </div>
             {/* Hover actions: show if hovered or checked */}
-            {(hoveredId === email._id || checked) ? (
-              <div className="flex-none text-gray-400 text-sm flex items-center gap-2" onClick={e => e.stopPropagation()}>
+            {hoveredId === email._id || checked ? (
+              <div
+                className="flex-none text-gray-400 text-sm flex items-center gap-2"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   className="hover:bg-gray-100 p-1 rounded"
                   title="Mark as Read"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     handleMarkAsRead(email._id);
                   }}
                   disabled={email.read}
                 >
-                  <MdOutlineMarkEmailRead size={20} className={email.read ? 'text-green-400' : ''} />
+                  <MdOutlineMarkEmailRead
+                    size={20}
+                    className={email.read ? "text-green-400" : ""}
+                  />
                 </button>
                 <button
                   className="hover:bg-red-100 p-1 rounded text-red-500"
                   title="Delete"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     handleDelete(email._id);
                   }}
@@ -177,7 +209,9 @@ const Messages = ({ refreshKey, selectedTab }) => {
               </div>
             ) : (
               <div className="flex-none text-gray-400 text-xs ml-2 min-w-[120px] text-right">
-                {email?.createdAt ? new Date(email.createdAt).toLocaleString() : ''}
+                {email?.createdAt
+                  ? new Date(email.createdAt).toLocaleString()
+                  : ""}
               </div>
             )}
           </div>

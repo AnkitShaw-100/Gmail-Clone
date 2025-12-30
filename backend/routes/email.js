@@ -6,7 +6,7 @@ import { createEmailSchema } from "../validators/emailValidator.js";
 
 const router = express.Router();
 
-// Create a new email (send email)
+// Create a new email 
 router.post("/", auth, validateBody(createEmailSchema), async (req, res) => {
   try {
     console.log(req.body, req.user.email);
@@ -21,7 +21,6 @@ router.post("/", auth, validateBody(createEmailSchema), async (req, res) => {
   }
 });
 
-// Get all emails for the logged-in user (inbox)
 // Get all emails for the logged-in user (inbox and sent)
 router.get("/", auth, async (req, res) => {
   try {
@@ -39,7 +38,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// (Optional) Mark email as read
+// Mark email as read
 router.patch("/:id/read", auth, async (req, res) => {
   try {
     const email = await Email.findById(req.params.id);

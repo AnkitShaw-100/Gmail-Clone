@@ -1,4 +1,4 @@
 const corsOptions = {
-  origin: ["https://gmail-clone-yy27.vercel.app", "http://localhost:3000"],
+  origin: ["https://mailify-fullstack.vercel.app/", "http://localhost:3000"],
   credentials: true,
 };

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { IoSettingsOutline, IoLogOutOutline } from "react-icons/io5";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { PiDotsNineBold } from "react-icons/pi";
 import { IoIosSearch } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
 
 const Navbar = ({ onLogout }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,7 +20,7 @@ const Navbar = ({ onLogout }) => {
           onClick={() => setMobileMenuOpen((prev) => !prev)}
           aria-label="Open menu"
         >
-          <RxHamburgerMenu size={'20px'} />
+          <RxHamburgerMenu size={"20px"} />
         </button>
         <img
           className="w-8"
@@ -29,7 +29,9 @@ const Navbar = ({ onLogout }) => {
         />
         <h1
           className={`text-2xl text-gray-500 font-medium hidden md:block transition-opacity duration-200 
-          ${mobileSearchOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          ${
+            mobileSearchOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
         >
           Gmail
         </h1>
@@ -42,7 +44,7 @@ const Navbar = ({ onLogout }) => {
           <input
             type="text"
             value={searchText}
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search mail"
             className="rounded-full w-full bg-transparent outline-none px-1"
           />
@@ -58,8 +60,12 @@ const Navbar = ({ onLogout }) => {
               <FaRegQuestionCircle size={"20px"} />
             </div>
             <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50">
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">Help Center</button>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">Send Feedback</button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                Help Center
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                Send Feedback
+              </button>
             </div>
           </div>
           {/* Settings Dropdown - Minimal UI to match Help Dropdown */}
@@ -68,10 +74,18 @@ const Navbar = ({ onLogout }) => {
               <IoSettingsOutline size={"20px"} />
             </div>
             <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50">
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">See all settings</button>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">Themes</button>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">Inbox type</button>
-              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">Density</button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                See all settings
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                Themes
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                Inbox type
+              </button>
+              <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                Density
+              </button>
             </div>
           </div>
           <div className="p-3 rounded-full hover:bg-gray-100 cursor-pointer">
@@ -83,7 +97,7 @@ const Navbar = ({ onLogout }) => {
                        hover:from-red-600 hover:to-red-700 text-white font-medium 
                        rounded-full shadow-md transition-all duration-300 ease-in-out"
             onClick={() => {
-              localStorage.removeItem('token');
+              localStorage.removeItem("token");
               if (onLogout) onLogout();
             }}
           >
@@ -108,7 +122,7 @@ const Navbar = ({ onLogout }) => {
                      hover:from-red-600 hover:to-red-700 text-white font-medium 
                      rounded-full shadow-md transition-all duration-300 ease-in-out"
           onClick={() => {
-            localStorage.removeItem('token');
+            localStorage.removeItem("token");
             if (onLogout) onLogout();
           }}
         >
@@ -142,7 +156,7 @@ const Navbar = ({ onLogout }) => {
           <input
             type="text"
             value={searchText}
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search mail"
             className="rounded-full w-full bg-transparent outline-none px-1"
           />
@@ -150,6 +164,6 @@ const Navbar = ({ onLogout }) => {
       )}
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

@@ -1,11 +1,13 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
+// Get Users
 export const getUsers = async (req, res) => {
   const users = await User.find();
   res.json(users);
 };
 
+// Create User
 export const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {

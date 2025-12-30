@@ -6,7 +6,11 @@ import emailRoutes from "./routes/email.js";
 import auth from "./middlewares/auth.js";
 import errorHandler from "./middlewares/errorMiddleware.js";
 import cors from "cors";
+
+// Dotenv cofig
 dotenv.config();
+
+// Connect DB
 connectDB();
 
 const app = express();

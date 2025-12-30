@@ -11,17 +11,19 @@ const MailDetail = ({ email, onClose }) => {
   // Fetch latest email with replies
   const fetchMail = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/emails/${email._id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/emails/${email._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (res.ok) {
         const data = await res.json();
         setMailData(data);
       }
     } catch (err) {
-
-      console.error('Failed to fetch mail:', err);
+      console.error("Failed to fetch mail:", err);
     }
   };
 
@@ -35,18 +37,21 @@ const MailDetail = ({ email, onClose }) => {
     setLoading(true);
     setError("");
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/emails/${email._id}/reply`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ body: replyText })
-      });
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/emails/${email._id}/reply`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ body: replyText }),
+        }
+      );
       if (!res.ok) {
         const data = await res.json();
-        setError(data.message || 'Failed to send reply');
+        setError(data.message || "Failed to send reply");
         setLoading(false);
         return;
       }
@@ -56,7 +61,7 @@ const MailDetail = ({ email, onClose }) => {
       setTimeout(() => setSuccess(""), 2500);
       await fetchMail();
     } catch {
-      setError('Failed to send reply');
+      setError("Failed to send reply");
     }
     setLoading(false);
   };
@@ -151,14 +156,16 @@ const MailDetail = ({ email, onClose }) => {
               <span className="text-sm font-semibold text-gray-900">
                 {email.from}
               </span>{" "}
-              <span className="text-xs text-gray-500">&lt;{email.from}&gt;</span>
+              <span className="text-xs text-gray-500">
+                &lt;{email.from}&gt;
+              </span>
             </div>
             <span className="text-xs text-gray-500">
               {email.createdAt
                 ? new Date(email.createdAt).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
                 : ""}
             </span>
           </div>
@@ -168,13 +175,16 @@ const MailDetail = ({ email, onClose }) => {
         </div>
       </div>
 
-
       {/* Conversation (original + replies) */}
       <div className="flex-1 overflow-y-auto px-8 pt-4 pb-6 text-gray-800 whitespace-pre-line text-[15px] leading-relaxed">
         {/* Original message */}
         <div className="mb-6">
           <div className="font-semibold text-gray-900">{mailData.from}</div>
-          <div className="text-xs text-gray-500 mb-1">{mailData.createdAt ? new Date(mailData.createdAt).toLocaleString() : ""}</div>
+          <div className="text-xs text-gray-500 mb-1">
+            {mailData.createdAt
+              ? new Date(mailData.createdAt).toLocaleString()
+              : ""}
+          </div>
           <div>{mailData.body}</div>
         </div>
         {/* Replies */}
@@ -183,7 +193,11 @@ const MailDetail = ({ email, onClose }) => {
             {mailData.replies.map((reply, idx) => (
               <div key={idx} className="border-l-4 border-blue-200 pl-4">
                 <div className="font-semibold text-blue-700">{reply.from}</div>
-                <div className="text-xs text-gray-400 mb-1">{reply.createdAt ? new Date(reply.createdAt).toLocaleString() : ""}</div>
+                <div className="text-xs text-gray-400 mb-1">
+                  {reply.createdAt
+                    ? new Date(reply.createdAt).toLocaleString()
+                    : ""}
+                </div>
                 <div>{reply.body}</div>
               </div>
             ))}
@@ -193,7 +207,11 @@ const MailDetail = ({ email, onClose }) => {
 
       {/* Reply Section */}
       <div className="border-t border-gray-200 px-8 py-4 bg-gray-50">
-        {success && <div className="text-green-600 text-sm mb-2 font-medium">{success}</div>}
+        {success && (
+          <div className="text-green-600 text-sm mb-2 font-medium">
+            {success}
+          </div>
+        )}
         {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
         {!showReply ? (
           <button
@@ -217,7 +235,7 @@ const MailDetail = ({ email, onClose }) => {
                 onClick={handleReplySend}
                 disabled={loading}
               >
-                {loading ? 'Sending...' : 'Send'}
+                {loading ? "Sending..." : "Send"}
               </button>
               <button
                 onClick={() => setShowReply(false)}

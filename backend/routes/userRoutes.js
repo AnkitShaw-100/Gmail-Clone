@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-// Example route
+// Test Route
 router.get("/", (req, res) => {
   res.send("User route working!");
 });
